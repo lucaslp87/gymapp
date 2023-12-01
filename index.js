@@ -1,5 +1,4 @@
-//Idea: un simulador de app para gimnasios, que permita loguearse, inscribirse en clases, lleve la asistencia de los alumnos y recuerde cuando se vencen los abonos.
-//Lo que sigue es un algoritmo que permita cargar los datos de un alumno, su plan, el peso que levanto en un test de fuerza máxima; y devuelva los datos ordenados, el monto a abonar por ese plan y el peso que tiene que levantar ese día en funcion del porcentaje que desea utilizar.
+/*Lo que sigue es un algoritmo que permita cargar los datos de un alumno, su plan, el peso que levanto en un test de fuerza máxima; y devuelva los datos ordenados, el monto a abonar por ese plan y el peso que tiene que levantar ese día en funcion del porcentaje que desea utilizar.*/
 let salir="no";
 do{
 let nombre= prompt("Ingrese nombre del alumno");
