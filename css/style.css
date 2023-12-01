@@ -3,9 +3,8 @@ body {
     font-family: 'Montserrat', sans-serif;
     background-image: linear-gradient(
         to bottom,
-        #0008, #000c
+        #0009, #0004
     ), url("../img/background.jpg");
-    backdrop-filter: blur(1px);
     object-fit: cover;
     background-size: cover;
     background-position: center center; 
