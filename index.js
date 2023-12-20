@@ -1,39 +1,106 @@
-/*Lo que sigue es un algoritmo que permita cargar los datos de un alumno, su plan, el peso que levanto en un test de fuerza máxima; y devuelva los datos ordenados, el monto a abonar por ese plan y el peso que tiene que levantar ese día en funcion del porcentaje que desea utilizar.*/
-let salir="no";
+//Habiendo hecho las clases de DOM y eventos entiendo que hay mil maneras de hacer esto mas eficiente y lindo esteticamente, pero creo que igual asi cumple las condiciones necesarias
+function Alumno(){
+    this.nombre= prompt("Ingrese el nombre del alumno");
+    this.apellido= prompt("Ingrese el apellido del alumno");
+    this.dni=prompt("Ingrese el dni del alumno");
+    this.plan= prompt("Ingrese el plan: 'Funcional', 'Gimnasio, 'Deportivo o  'Full'");
+    this.debe="no";
+    this.rmSentadilla=null;
+    this.rmPressPlano=null;
+    this.rmPressMilitar=null;
+    this.rmPesoMuerto=null;
+    this.actualizarMarcas = function() {
+        
+        let ejercicio = prompt("Ingrese el ejercicio del cual quiere actualizar la marca: 'sentadilla', 'press plano', 'press militar', 'peso muerto'").toLocaleLowerCase();
+        let nuevaMarca = parseFloat(prompt("Ingrese la nueva marca:"));
+        switch (ejercicio) {
+            case 'sentadilla':
+                this.rmSentadilla = nuevaMarca;
+                break;
+            case 'press plano':
+                this.rmPressPlano = nuevaMarca;s
+                break;
+            case 'press militar':
+                this.rmPressMilitar = nuevaMarca;
+                break;
+            case 'peso muerto':
+                this.rmPesoMuerto = nuevaMarca;
+                break;
+            default:
+                console.log("Ejercicio no reconocido");
+        }
+    };
+}
+let alumnos=[];
+let continuar=true;
+let opcion;
+
 do{
-let nombre= prompt("Ingrese nombre del alumno");
-let apellido= prompt("Ingrese apellido del alumno");
-let nombreCompleto= nombre + " " + apellido;
-let plan = prompt("Indica si tu plan es 'Funcional', 'Gimnasio, 'Deportivo o  'Full'").toLowerCase();
+    opcion=prompt("Ingrese 'cargar' para crear un nuevo alumno, 'consultar' para obtener todos sus datos, o ingrese 'salir' para finalizar").toLocaleLowerCase();
 
+    switch(opcion){
+        case 'cargar':
+            
+            alumnos.push(new Alumno());
+            console.log('Alumno cargado correctamente! La cantidad de alumnos ahora es de ' + alumnos.length +'.' )
+            let imprimir;
+            do{
+                imprimir=prompt("¿Desea imprimir el listado de alumnos hasta el momento?(Si/No)").toLocaleLowerCase();
+            }while(imprimir!='si' && imprimir!='no')
+            if(imprimir==='si'){
+                for(let alumno of alumnos){
+                    console.log(alumno);
+                    }
+                break;
+            }else if(imprimir==='no'){
+                break;
+            }
+            
 
-function montoAbono(){
-    //Funcion para calcular el monto a abonar
-    switch(plan){
-        case "funcional":
-            return 10500;
-        case "gimnasio":
-            return 8500;            
-        case "deportivo":
-            return 12500;            
-        case "full":
-            return 20000;            
+        case 'consultar':
+            
+                let dniBuscado = prompt("Ingrese el dni del alumno que desea consultar");
+                let indiceBuscado = alumnos.findIndex(alumno => alumno.dni === dniBuscado);
+
+                if (indiceBuscado!=-1) {
+                    console.log("Nombre: "+ alumnos[indiceBuscado].nombre);
+                    console.log("Apellido: "+ alumnos[indiceBuscado].apellido);
+                    console.log("DNI: "+ alumnos[indiceBuscado].dni);
+                    console.log("1RM en sentadilla: "+ alumnos[indiceBuscado].rmSentadilla);
+                    console.log("1RM en press plano: "+ alumnos[indiceBuscado].rmPressPlano);
+                    console.log("1RM en press militar: "+ alumnos[indiceBuscado].rmPressMilitar);
+                    console.log("1RM en peso muerto: "+ alumnos[indiceBuscado].rmPesoMuerto);
+                } else {
+                    console.log("No se encontró al alumno");
+                }
+                let deseo=prompt("¿Desea cargar una nueva marca?(Si/No)").toLocaleLowerCase();
+                    do{
+                        
+                        alumnos[indiceBuscado].actualizarMarcas();
+                        console.log("Marca actualizada correctamente.");
+                        console.log("Nombre: "+ alumnos[indiceBuscado].nombre);
+                        console.log("Apellido: "+ alumnos[indiceBuscado].apellido);
+                        console.log("DNI: "+ alumnos[indiceBuscado].dni);
+                        console.log("1RM en sentadilla: "+ alumnos[indiceBuscado].rmSentadilla);
+                        console.log("1RM en press plano: "+ alumnos[indiceBuscado].rmPressPlano);
+                        console.log("1RM en press militar: "+ alumnos[indiceBuscado].rmPressMilitar);
+                        console.log("1RM en peso mnuerto"+ alumnos[indiceBuscado].rmPesoMuerto);
+
+                        deseo=prompt("¿Desea cargar una nueva marca?(Si/No)").toLocaleLowerCase();
+
+                    }while(deseo==='si')
+                if(deseo==='no'){
+                    break;
+                } else{
+                    deseo=prompt("Respuesta incorrecta. Ingrese 'si' o 'no'");
+
+                }                                   
+        case 'salir':
+            continuar=false;
+            break;
         default:
-            return undefined;
+            alert("Ingresó un valor incorrecto");
+            break;
+            
     }
-
-}
-function calcularPeso(){
-    let repMax= parseInt(prompt("Ingrese el peso de su test de repeticion máxima (kg)"));
-    let porcentaje=parseInt(prompt("Ingrese el porcentaje con el que desea trabajar hoy"));
-    let peso=(repMax*porcentaje)/100;
-    return peso;
-}
-
-console.log("El alumno ingresado es: " + nombreCompleto);
-console.log("El plan al que esta inscripto es: " + plan);
-console.log("El monton a abonar por este plan es: $" + montoAbono());
-console.log("Hoy debe trabajar con un peso de " + calcularPeso() + "kg en el ejercicio elegido");
-salir=prompt("¿Desea salir?").toLowerCase();
-
-} while (salir=="no")
+}while (continuar);

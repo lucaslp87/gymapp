@@ -1,0 +1,40 @@
+/*En cuanto al HTML y CSS: estoy practicando :P mirando cursos de SoyDalto, yo no vengo de hacer en coder el de desarrollo web*/
+body{
+    background-color: #222;
+}
+.contenedor-fondo{
+    opacity: .2;
+}
+.contenedor-fondo img{
+    object-fit: cover;
+}
+.contenedor{
+    display: block;
+    position: absolute;
+    top:25%;
+    left: 25%;
+    border: 1px solid #000;
+    padding: 25px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #dddd;
+}
+
+.button{
+    display: inline-block;
+    margin:15px;
+    padding: 10px;
+    border: 3px inset #000;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #b99;
+    transition: background .2s;
+    cursor: pointer;
+}
+.button:hover{
+    background-color: #b77;
+}
+.button:active{
+    background-color: #b66;
+    transition: background 0;
+}
