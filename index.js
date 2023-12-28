@@ -1,106 +1,125 @@
 //Habiendo hecho las clases de DOM y eventos entiendo que hay mil maneras de hacer esto mas eficiente y lindo esteticamente, pero creo que igual asi cumple las condiciones necesarias
-function Alumno(){
-    this.nombre= prompt("Ingrese el nombre del alumno");
-    this.apellido= prompt("Ingrese el apellido del alumno");
-    this.dni=prompt("Ingrese el dni del alumno");
-    this.plan= prompt("Ingrese el plan: 'Funcional', 'Gimnasio, 'Deportivo o  'Full'");
-    this.debe="no";
-    this.rmSentadilla=null;
-    this.rmPressPlano=null;
-    this.rmPressMilitar=null;
-    this.rmPesoMuerto=null;
-    this.actualizarMarcas = function() {
-        
-        let ejercicio = prompt("Ingrese el ejercicio del cual quiere actualizar la marca: 'sentadilla', 'press plano', 'press militar', 'peso muerto'").toLocaleLowerCase();
-        let nuevaMarca = parseFloat(prompt("Ingrese la nueva marca:"));
-        switch (ejercicio) {
-            case 'sentadilla':
-                this.rmSentadilla = nuevaMarca;
-                break;
-            case 'press plano':
-                this.rmPressPlano = nuevaMarca;s
-                break;
-            case 'press militar':
-                this.rmPressMilitar = nuevaMarca;
-                break;
-            case 'peso muerto':
-                this.rmPesoMuerto = nuevaMarca;
-                break;
-            default:
-                console.log("Ejercicio no reconocido");
-        }
-    };
-}
 let alumnos=[];
-let continuar=true;
-let opcion;
+let cargar=document.querySelector("#cargar");
+let consultar=document.querySelector("#consultar");
+let panel=document.querySelector("#panel");
 
-do{
-    opcion=prompt("Ingrese 'cargar' para crear un nuevo alumno, 'consultar' para obtener todos sus datos, o ingrese 'salir' para finalizar").toLocaleLowerCase();
 
-    switch(opcion){
-        case 'cargar':
+
+class Alumno{
+    constructor(nombre,apellido,dni,plan){
+        this.nombre=nombre;
+        this.apellido=apellido;
+        this.dni=dni;
+        this.plan=plan;
+        this.debe=false;
+        }
+}
+
+function mostrarPanelCarga(){
+    panel.innerHTML=`
+
+    <img src="./oro logo.png">
+
+    <h1>CARGAR UN ALUMNO</h1>
+        
+    <h2>Complete el siguiente formulario</h2>
+
+    <form class="formulario" id="form">
+        
+        <input type="text" name="nombre" class="menu-input" placeholder="Nombre"></input>
             
-            alumnos.push(new Alumno());
-            console.log('Alumno cargado correctamente! La cantidad de alumnos ahora es de ' + alumnos.length +'.' )
-            let imprimir;
-            do{
-                imprimir=prompt("¿Desea imprimir el listado de alumnos hasta el momento?(Si/No)").toLocaleLowerCase();
-            }while(imprimir!='si' && imprimir!='no')
-            if(imprimir==='si'){
-                for(let alumno of alumnos){
-                    console.log(alumno);
-                    }
-                break;
-            }else if(imprimir==='no'){
-                break;
-            }
+        <input type="text" name="apellido" class="menu-input" placeholder="Apellido"></input>
             
-
-        case 'consultar':
+        <input type="number" name="dni" class="menu-input" placeholder="DNI"></input>
             
-                let dniBuscado = prompt("Ingrese el dni del alumno que desea consultar");
-                let indiceBuscado = alumnos.findIndex(alumno => alumno.dni === dniBuscado);
-
-                if (indiceBuscado!=-1) {
-                    console.log("Nombre: "+ alumnos[indiceBuscado].nombre);
-                    console.log("Apellido: "+ alumnos[indiceBuscado].apellido);
-                    console.log("DNI: "+ alumnos[indiceBuscado].dni);
-                    console.log("1RM en sentadilla: "+ alumnos[indiceBuscado].rmSentadilla);
-                    console.log("1RM en press plano: "+ alumnos[indiceBuscado].rmPressPlano);
-                    console.log("1RM en press militar: "+ alumnos[indiceBuscado].rmPressMilitar);
-                    console.log("1RM en peso muerto: "+ alumnos[indiceBuscado].rmPesoMuerto);
-                } else {
-                    console.log("No se encontró al alumno");
-                }
-                let deseo=prompt("¿Desea cargar una nueva marca?(Si/No)").toLocaleLowerCase();
-                    do{
-                        
-                        alumnos[indiceBuscado].actualizarMarcas();
-                        console.log("Marca actualizada correctamente.");
-                        console.log("Nombre: "+ alumnos[indiceBuscado].nombre);
-                        console.log("Apellido: "+ alumnos[indiceBuscado].apellido);
-                        console.log("DNI: "+ alumnos[indiceBuscado].dni);
-                        console.log("1RM en sentadilla: "+ alumnos[indiceBuscado].rmSentadilla);
-                        console.log("1RM en press plano: "+ alumnos[indiceBuscado].rmPressPlano);
-                        console.log("1RM en press militar: "+ alumnos[indiceBuscado].rmPressMilitar);
-                        console.log("1RM en peso mnuerto"+ alumnos[indiceBuscado].rmPesoMuerto);
-
-                        deseo=prompt("¿Desea cargar una nueva marca?(Si/No)").toLocaleLowerCase();
-
-                    }while(deseo==='si')
-                if(deseo==='no'){
-                    break;
-                } else{
-                    deseo=prompt("Respuesta incorrecta. Ingrese 'si' o 'no'");
-
-                }                                   
-        case 'salir':
-            continuar=false;
-            break;
-        default:
-            alert("Ingresó un valor incorrecto");
-            break;
+        <input type="text" name="plan" class="menu-input" placeholder="Plan"></input>
             
+        <button type="submit" class="menu-button">Cargar</button>
+        
+        <button type="button" class="menu-button" id="volver">Volver</button>
+    
+    </form>
+    `
+    
+    let form=document.querySelector("#form");
+    let volver=document.querySelector("#volver");
+    
+    let alumnoACargar={ 
+        nombre:"", 
+        apellido:"",
+        dni:"",   
+        plan:""
     }
-}while (continuar);
+
+    form.addEventListener("input", (event)=>{
+            alumnoACargar[event.target.name] = event.target.value;
+        })
+    
+    form.addEventListener("submit", ()=>{
+        
+        event.preventDefault();
+        alumnos.push(new Alumno(alumnoACargar.nombre, alumnoACargar.apellido, alumnoACargar.dni, alumnoACargar.plan));
+        console.log('Alumno cargado correctamente! La cantidad de alumnos ahora es de ' + alumnos.length +'.' );
+        })
+    volver.addEventListener("click", mostrarPanelPrincipal);
+    
+}   
+
+function mostrarPanelConsulta(){
+
+    panel.innerHTML=`
+
+    <img src="./oro logo.png">
+
+    <h1>CONSULTAR UN ALUMNO</h1>
+        
+    <h2>Ingrese el DNI del alumno</h2>
+
+    <form class="formulario" id="form">
+                    
+        <input type="number" name="dni" class="menu-input" placeholder="DNI"></input>
+            
+        <button type="submit" class="menu-button" id="buscar">Buscar</button>
+        
+        <button type="button" class="menu-button" id="volver">Volver</button>
+    
+    </form>
+    `;
+    
+    let form=document.querySelector("#form"); 
+    let volver=document.querySelector("#volver");
+    
+    form.addEventListener("submit", (event)=>{
+        event.preventDefault();
+        let dniBuscado=form.querySelector(".menu-input").value ;   
+        console.log(alumnos.find((el)=>el.dni===dniBuscado));           
+    });
+
+    volver.addEventListener("click", mostrarPanelPrincipal);
+}
+
+function mostrarPanelPrincipal(){
+    panel.innerHTML=`
+    <img src="./oro logo.png">
+                
+    <h1>BIENVENIDO/A</h1>
+                
+    <h2>Seleccione una opción</h2>
+                
+    <button class="menu-button" id="cargar">Cargar</button>
+
+    <button class="menu-button" id="consultar">Consultar</button>
+
+    <button class="menu-button" id="nuevo-rm">Nuevo RM</button>
+    
+    `;
+    cargar=document.querySelector("#cargar");
+    cargar.addEventListener("click", mostrarPanelCarga);
+    let consultar=document.querySelector("#consultar");
+    consultar.addEventListener("click", mostrarPanelConsulta);
+    
+}
+cargar.addEventListener("click", mostrarPanelCarga);
+
+consultar.addEventListener("click", mostrarPanelConsulta);
