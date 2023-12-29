@@ -1,18 +1,19 @@
-//Habiendo hecho las clases de DOM y eventos entiendo que hay mil maneras de hacer esto mas eficiente y lindo esteticamente, pero creo que igual asi cumple las condiciones necesarias
 let alumnos=[];
 let cargar=document.querySelector("#cargar");
 let consultar=document.querySelector("#consultar");
 let panel=document.querySelector("#panel");
+let nuevoRM=document.querySelector("#nuevo-rm");
 
 
 
 class Alumno{
-    constructor(nombre,apellido,dni,plan){
+    constructor(nombre,apellido,dni,plan,sentadilla,pressMilitar,pressPlano,pesoMuerto){
         this.nombre=nombre;
         this.apellido=apellido;
         this.dni=dni;
         this.plan=plan;
         this.debe=false;
+        this.rms={};
         }
 }
 
@@ -56,7 +57,7 @@ function mostrarPanelCarga(){
             alumnoACargar[event.target.name] = event.target.value;
         })
     
-    form.addEventListener("submit", ()=>{
+    form.addEventListener("submit", (event)=>{
         
         event.preventDefault();
         alumnos.push(new Alumno(alumnoACargar.nombre, alumnoACargar.apellido, alumnoACargar.dni, alumnoACargar.plan));
@@ -92,11 +93,78 @@ function mostrarPanelConsulta(){
     
     form.addEventListener("submit", (event)=>{
         event.preventDefault();
-        let dniBuscado=form.querySelector(".menu-input").value ;   
+        let dniBuscado=form.querySelector(".menu-input").value;   
         console.log(alumnos.find((el)=>el.dni===dniBuscado));           
     });
 
     volver.addEventListener("click", mostrarPanelPrincipal);
+}
+
+function mostrarPanelRM(){
+    
+    panel.innerHTML=`
+
+    <img src="./oro logo.png">
+
+    <h1>Cargar un nuevo RM</h1>
+        
+    <h2>Indique primero el DNI del alumno</h2>
+
+    <form class="formulario" id="form1">
+                    
+        <input type="number" name="dni" class="menu-input" placeholder="DNI"></input>
+            
+        <button type="submit" class="menu-button" id="buscar">Buscar</button>
+        
+        <button type="button" class="menu-button" id="volver">Volver</button>
+    
+    </form>
+    `;
+
+    let form=document.querySelector("#form1"); 
+    let volver=document.querySelector("#volver");
+    
+    form.addEventListener("submit", (event)=>{
+        event.preventDefault();
+        let dniBuscado=form.querySelector(".menu-input").value; 
+        panel.innerHTML=`
+        <img src="./oro logo.png">
+        <h1>BIENVENIDO/A</h1>
+        <h2>Seleccione una opción</h2>
+        <form class="formulario" id="form2">
+            
+            <select id="lista" class="menu-input">
+                <option id="opcion" value="sentadilla">Sentadilla</option>
+                <option id="opcion" value="pressPlano">Press plano</option>
+                <option id="opcion" value="pressMilitar">Press militar</option>
+                <option id="opcion" value="pesoMuerto">Peso muerto</option>
+            </select>
+            <input type="text" class="menu-input" id="kg" placeholder="Cantidad en Kg"></input>
+            <button type="submit" class="menu-button">Guardar</button>
+            <button type="button" class="menu-button" id="volver">Volver</button>
+
+        </form>
+        `;
+    
+        volver=document.querySelector("#volver");
+        form=document.querySelector("#form2");
+        let lista=document.querySelector("#lista");
+        let kg=document.querySelector("#kg");
+        
+        form.addEventListener("submit", (event)=>{
+            event.preventDefault();
+            let index=alumnos.findIndex((el)=> dniBuscado===el.dni);
+            let opcion=lista.value;
+            alumnos[index].rms[opcion]= kg.value;
+            console.log(alumnos[index]);
+            
+        })
+        volver.addEventListener("click", mostrarPanelRM);
+
+    });
+
+    volver.addEventListener("click", mostrarPanelPrincipal);
+
 }
 
 function mostrarPanelPrincipal(){
@@ -116,10 +184,14 @@ function mostrarPanelPrincipal(){
     `;
     cargar=document.querySelector("#cargar");
     cargar.addEventListener("click", mostrarPanelCarga);
-    let consultar=document.querySelector("#consultar");
+    consultar=document.querySelector("#consultar");
     consultar.addEventListener("click", mostrarPanelConsulta);
+    nuevoRM=document.querySelector("#nuevo-rm   ");
+    nuevoRM.addEventListener("click", mostrarPanelRM);
     
 }
 cargar.addEventListener("click", mostrarPanelCarga);
 
 consultar.addEventListener("click", mostrarPanelConsulta);
+
+nuevoRM.addEventListener("click", mostrarPanelRM)

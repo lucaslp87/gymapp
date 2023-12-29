@@ -5,8 +5,8 @@ body {
     ), url("background.jpg");
     object-fit: cover;
     background-size: cover; /* Añade esto para asegurarte de que la imagen de fondo se ajuste completamente */
-    background-position: center center; /* Añade esto para centrar la imagen */
-    background-repeat: no-repeat; /* Añade esto para que la imagen no se repita */
+    background-position: center center; 
+    background-repeat: no-repeat; 
     
 }
 
@@ -17,6 +17,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+
 }
 
 .contenedor__panel {
@@ -61,11 +62,16 @@ body {
     background-color: #d63214;
 }
 
-.menu-input {
+.menu-input,
+#opcion {
+    display: block;
     padding: 8px;
-    margin: 5px 0;
+    margin: 5px auto;
     border: 1px solid #ccc;
     border-radius: 4px;
+    width:150px;
+    box-shadow: 0 0 10px #000.1;
+    text-align: center;
 }
 input::placeholder{
     text-align: center;
