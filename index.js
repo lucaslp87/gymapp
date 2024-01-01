@@ -7,7 +7,7 @@ let nuevoRM=document.querySelector("#nuevo-rm");
 
 
 class Alumno{
-    constructor(nombre,apellido,dni,plan,sentadilla,pressMilitar,pressPlano,pesoMuerto){
+    constructor(nombre,apellido,dni,plan,){
         this.nombre=nombre;
         this.apellido=apellido;
         this.dni=dni;
@@ -32,7 +32,7 @@ function mostrarPanelCarga(){
             
         <input type="text" name="apellido" class="menu-input" placeholder="Apellido"></input>
             
-        <input type="number" name="dni" class="menu-input" placeholder="DNI"></input>
+        <input type="text" name="dni" class="menu-input" placeholder="DNI"></input>
             
         <input type="text" name="plan" class="menu-input" placeholder="Plan"></input>
             

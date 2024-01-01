@@ -1,57 +1,51 @@
 body {
+    font-family: 'Montserrat', sans-serif;
     background-image: linear-gradient(
         to bottom,
         #0009, #0004
     ), url("background.jpg");
     object-fit: cover;
-    background-size: cover; /* Añade esto para asegurarte de que la imagen de fondo se ajuste completamente */
+    background-size: cover;
     background-position: center center; 
-    background-repeat: no-repeat; 
-    
-}
-
-.contenedor {
-    font-family: 'Arial', sans-serif;
+    background-repeat: no-repeat;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-
+    height: 100vh;
 }
 
 .contenedor__panel {
-    background-color: #cccc;
+    background-color: #cccd;
     padding: 25px;
-    border: 1px solid #000;
+    border: none;
     border-radius: 8px;
-    box-shadow: 0 0 10px #000.1;
+    box-shadow: 0 0 100px #000.1;
     max-width: 30%;
-    width: auto;
+    width: min-content;
     text-align: center;
 }
 
+
 .contenedor__panel img {
     display: inline-block;
-    width: 50%;
+    width: 35%;
 }
 
-.contenedor__panel h1, 
-.contenedor__panel h2 {
-    font-size: medium;
-}
+
 
 .menu-button {
     background-color: #d69214;
     margin: 10px auto;
     color: #000000;
     padding: 10px;
-    border: solid 1px;
+    border:none;
     border-radius: 4px;
     cursor: pointer;
     width: 150px;
     box-shadow: 0 0 10px #000.1;
     display: block;
+    font-weight: bold;
 }
 
 .menu-button:hover {

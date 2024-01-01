@@ -1,51 +1,92 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const loginForm = document.getElementById("loginForm");
-    const signupLink = document.getElementById("signupLink");
-    const container = document.querySelector(".container");
+let users=[];
+let container = document.querySelector(".container");
 
-    loginForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        console.log("Iniciando sesión...");
-        // Agrega aquí la lógica para autenticar al usuario
-    });
-
-    signupLink.addEventListener("click", function (event) {
-        event.preventDefault();
-        console.log("Mostrando formulario de registro...");
-        showSignupForm();
-    });
-
-    function showSignupForm() {
-        const signupFormHTML = `
-            <form id="signupForm">
-                <h2>Crear cuenta</h2>
-                <label for="newUsername">Nuevo Usuario:</label>
-                <input type="text" id="newUsername" name="newUsername" required>
-                <label for="newPassword">Nueva Contraseña:</label>
-                <input type="password" id="newPassword" name="newPassword" required>
-                <button type="submit">Crear cuenta</button>
-            </form>
-            <div class="signup">
-                <p>¿Ya tienes cuenta? <a href="#" id="loginLink">Iniciar sesión</a></p>
-            </div>
-        `;
-
-        container.innerHTML = signupFormHTML;
-
-        const signupForm = document.getElementById("signupForm");
-        const loginLink = document.getElementById("loginLink");
-
-        signupForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-            console.log("Creando cuenta...");
-            // Agrega aquí la lógica para crear la cuenta
-        });
-
-        loginLink.addEventListener("click", function (event) {
-            event.preventDefault();
-            console.log("Mostrando formulario de inicio de sesión...");
-            // Vuelve a mostrar el formulario de inicio de sesión
-            container.innerHTML = loginForm.outerHTML;
-        });
+class User{
+    constructor(userName, password, checkPassword, clientNum){
+        this.userName=userName;
+        this.password=password;
+        this.checkPassword=checkPassword;
+        this.clientNum=clientNum;
     }
-});
+}
+
+function showLogInForm(){
+
+    let logInFormHTML=`
+        <form id="logInForm">
+            <img src="../oro logo.png">
+            <h2>Inicie sesión</h2>
+            <input type="text" id="username" name="username" placeholder="Usuario" required>
+            <input type="password" id="password" name="password" placeholder="Contraseña" required>
+            <button type="submit">Iniciar sesión</button>
+        </form>
+        <div class="signUp">
+            <p>¿No tienes cuenta? <a href="#" id="signUpLink">Crear cuenta</a></p>
+        </div>
+    `;
+    container.innerHTML= logInFormHTML;
+    let signUpLink=document.querySelector("#signUpLink");
+    signUpLink.addEventListener("click", (event)=>{
+        event.preventDefault();
+        showSignUpForm();
+    })
+    let logInForm=document.querySelector("#logInForm");
+    
+    
+    logInForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+    });
+
+
+}
+
+function showSignUpForm() {
+    let signUpFormHTML = `
+        <form id="signUpForm">
+            <img src="../oro logo.png">
+            <h2>Crear cuenta</h2>
+            <input type="text" id="newUsername" name="newUserName" placeholder="Nuevo usuario" required>
+            <input type="password" id="newPassword" name="newPassword" placeholder="Contraseña" required>
+            <input type="password" id="checkPassword" name="checkPassword" placeholder="Repita contraseña" required>
+            <input type="text" id="clientNum" name="clientNum" placeholder="Nro. cliente" required>
+            <button type="submit">Crear cuenta</button>
+        </form>
+        <div class="signUp">
+            <p>¿Ya tienes cuenta? <a href="#" id="logInLink">Iniciar sesión</a></p>
+        </div>
+    `;
+
+    container.innerHTML = signUpFormHTML;
+
+    let signUpForm =document.querySelector("#signUpForm");
+    
+    let userACargar={
+        newUserName:'',
+        newPassword:'',
+        checkPassword:'',
+        clientNum:''
+    }
+
+    signUpForm.addEventListener("input", (event)=>{
+        userACargar[event.target.name] = event.target.value;
+    });
+    
+    signUpForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if(userACargar.newPassword===userACargar.checkPassword){
+        users.push(new User(userACargar.newUserName, userACargar.newPassword, userACargar.checkPassword, userACargar.clientNum));
+            console.log('Usuario cargado correctamente! La cantidad de usuarios ahora es de ' + users.length +'.' );
+            console.log(users);
+        }else{
+            console.log("Las contraseñas no coinciden, intente de nuevo");
+        }
+    });
+
+    let logInLink = document.querySelector("#logInLink");
+    logInLink.addEventListener("click", (event)=>{
+        event.preventDefault();
+        showLogInForm();
+    })
+}
+showLogInForm();
