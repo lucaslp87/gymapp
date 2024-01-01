@@ -14,7 +14,7 @@ function showLogInForm(){
 
     let logInFormHTML=`
         <form id="logInForm">
-            <img src="../oro logo.png">
+            <img src="../Sources/oro logo.png">
             <h2>Inicie sesión</h2>
             <input type="text" id="username" name="username" placeholder="Usuario" required>
             <input type="password" id="password" name="password" placeholder="Contraseña" required>
@@ -38,13 +38,12 @@ function showLogInForm(){
 
     });
 
-
 }
 
 function showSignUpForm() {
     let signUpFormHTML = `
         <form id="signUpForm">
-            <img src="../oro logo.png">
+            <img src="../Sources/oro logo.png">
             <h2>Crear cuenta</h2>
             <input type="text" id="newUsername" name="newUserName" placeholder="Nuevo usuario" required>
             <input type="password" id="newPassword" name="newPassword" placeholder="Contraseña" required>

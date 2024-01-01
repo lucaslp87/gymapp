@@ -4,8 +4,6 @@ let consultar=document.querySelector("#consultar");
 let panel=document.querySelector("#panel");
 let nuevoRM=document.querySelector("#nuevo-rm");
 
-
-
 class Alumno{
     constructor(nombre,apellido,dni,plan,){
         this.nombre=nombre;
@@ -20,7 +18,7 @@ class Alumno{
 function mostrarPanelCarga(){
     panel.innerHTML=`
 
-    <img src="./oro logo.png">
+    <img src="../Sources/oro logo.png">
 
     <h1>CARGAR UN ALUMNO</h1>
         
@@ -71,7 +69,7 @@ function mostrarPanelConsulta(){
 
     panel.innerHTML=`
 
-    <img src="./oro logo.png">
+    <img src="../Sources/oro logo.png">
 
     <h1>CONSULTAR UN ALUMNO</h1>
         
@@ -104,7 +102,7 @@ function mostrarPanelRM(){
     
     panel.innerHTML=`
 
-    <img src="./oro logo.png">
+    <img src="../Sources/oro logo.png">
 
     <h1>Cargar un nuevo RM</h1>
         
@@ -128,7 +126,7 @@ function mostrarPanelRM(){
         event.preventDefault();
         let dniBuscado=form.querySelector(".menu-input").value; 
         panel.innerHTML=`
-        <img src="./oro logo.png">
+        <img src="../Sources/oro logo.png">
         <h1>BIENVENIDO/A</h1>
         <h2>Seleccione una opción</h2>
         <form class="formulario" id="form2">
@@ -169,7 +167,7 @@ function mostrarPanelRM(){
 
 function mostrarPanelPrincipal(){
     panel.innerHTML=`
-    <img src="./oro logo.png">
+    <img src="../Sources/oro logo.png">
                 
     <h1>BIENVENIDO/A</h1>
                 

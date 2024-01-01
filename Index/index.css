@@ -3,7 +3,7 @@ body {
     background-image: linear-gradient(
         to bottom,
         #0009, #0004
-    ), url("background.jpg");
+    ), url("../Sources/background.jpg");
     object-fit: cover;
     background-size: cover;
     background-position: center center; 
