@@ -14,28 +14,39 @@ function showLogInForm(){
 
     let logInFormHTML=`
         <form id="logInForm">
-            <img src="../Sources/oro logo.png">
-            <h2>Inicie sesión</h2>
-            <input type="text" id="username" name="username" placeholder="Usuario" required>
+            <img src="img/oro logo.png">
+            <h1>Inicie sesión</h1>
+            <input type="text" id="userName" name="userName" placeholder="Usuario" required>
             <input type="password" id="password" name="password" placeholder="Contraseña" required>
             <button type="submit">Iniciar sesión</button>
         </form>
         <div class="signUp">
             <p>¿No tienes cuenta? <a href="#" id="signUpLink">Crear cuenta</a></p>
-        </div>
+        </div>          
     `;
     container.innerHTML= logInFormHTML;
+    
     let signUpLink=document.querySelector("#signUpLink");
-    signUpLink.addEventListener("click", (event)=>{
+    signUpLink.addEventListener("click", (event) => {
         event.preventDefault();
         showSignUpForm();
     })
     let logInForm=document.querySelector("#logInForm");
     
     
-    logInForm.addEventListener("submit", function (event) {
+    logInForm.addEventListener("submit", (event) => {
         event.preventDefault();
+        let userToCheck=document.querySelector("#userName").value;
+        let passToCheck=document.querySelector("#password").value;
+        userFound = users.find((user)=> user.userName===userToCheck && user.password===passToCheck);
+        if(userFound!=undefined){
+            redirectToIndex();
+        }else{
+            alert("Usuario no encontrado, intentelo otra vez");
+            logInForm.reset();
+        }
 
+        
     });
 
 }
@@ -43,7 +54,7 @@ function showLogInForm(){
 function showSignUpForm() {
     let signUpFormHTML = `
         <form id="signUpForm">
-            <img src="../Sources/oro logo.png">
+            <img src="./img/oro logo.png">
             <h2>Crear cuenta</h2>
             <input type="text" id="newUsername" name="newUserName" placeholder="Nuevo usuario" required>
             <input type="password" id="newPassword" name="newPassword" placeholder="Contraseña" required>
@@ -59,7 +70,7 @@ function showSignUpForm() {
     container.innerHTML = signUpFormHTML;
 
     let signUpForm =document.querySelector("#signUpForm");
-    
+    let logInLink = document.querySelector("#logInLink");
     let userACargar={
         newUserName:'',
         newPassword:'',
@@ -75,17 +86,21 @@ function showSignUpForm() {
         event.preventDefault();
         if(userACargar.newPassword===userACargar.checkPassword){
         users.push(new User(userACargar.newUserName, userACargar.newPassword, userACargar.checkPassword, userACargar.clientNum));
-            console.log('Usuario cargado correctamente! La cantidad de usuarios ahora es de ' + users.length +'.' );
-            console.log(users);
+            alert('Cuenta cargada correctamente! La cantidad de usuarios ahora es de ' + users.length +'.' );
+            signUpForm.reset();
         }else{
-            console.log("Las contraseñas no coinciden, intente de nuevo");
+            alert("Las contraseñas no coinciden, intente de nuevo");
         }
+        
     });
 
-    let logInLink = document.querySelector("#logInLink");
     logInLink.addEventListener("click", (event)=>{
         event.preventDefault();
         showLogInForm();
     })
 }
 showLogInForm();
+
+function redirectToIndex(){
+    window.location.href="./index.html";
+}

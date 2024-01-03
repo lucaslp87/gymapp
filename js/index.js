@@ -18,7 +18,7 @@ class Alumno{
 function mostrarPanelCarga(){
     panel.innerHTML=`
 
-    <img src="../Sources/oro logo.png">
+    <img src="img/oro logo.png">
 
     <h1>CARGAR UN ALUMNO</h1>
         
@@ -36,7 +36,9 @@ function mostrarPanelCarga(){
             
         <button type="submit" class="menu-button">Cargar</button>
         
-        <button type="button" class="menu-button" id="volver">Volver</button>
+        <div class="volver">
+            <a href="#" id="volver">Volver</a></p>
+        </div>
     
     </form>
     `
@@ -69,7 +71,7 @@ function mostrarPanelConsulta(){
 
     panel.innerHTML=`
 
-    <img src="../Sources/oro logo.png">
+    <img src="img/oro logo.png">
 
     <h1>CONSULTAR UN ALUMNO</h1>
         
@@ -81,7 +83,9 @@ function mostrarPanelConsulta(){
             
         <button type="submit" class="menu-button" id="buscar">Buscar</button>
         
-        <button type="button" class="menu-button" id="volver">Volver</button>
+        <div class="volver">
+            <a href="#" id="volver">Volver</a></p>
+        </div>
     
     </form>
     `;
@@ -102,7 +106,7 @@ function mostrarPanelRM(){
     
     panel.innerHTML=`
 
-    <img src="../Sources/oro logo.png">
+    <img src="img/oro logo.png">
 
     <h1>Cargar un nuevo RM</h1>
         
@@ -114,7 +118,9 @@ function mostrarPanelRM(){
             
         <button type="submit" class="menu-button" id="buscar">Buscar</button>
         
-        <button type="button" class="menu-button" id="volver">Volver</button>
+        <div class="volver">
+            <a href="#" id="volver">Volver</a></p>
+        </div>
     
     </form>
     `;
@@ -126,7 +132,7 @@ function mostrarPanelRM(){
         event.preventDefault();
         let dniBuscado=form.querySelector(".menu-input").value; 
         panel.innerHTML=`
-        <img src="../Sources/oro logo.png">
+        <img src="img/oro logo.png">
         <h1>BIENVENIDO/A</h1>
         <h2>Seleccione una opción</h2>
         <form class="formulario" id="form2">
@@ -139,7 +145,9 @@ function mostrarPanelRM(){
             </select>
             <input type="text" class="menu-input" id="kg" placeholder="Cantidad en Kg"></input>
             <button type="submit" class="menu-button">Guardar</button>
-            <button type="button" class="menu-button" id="volver">Volver</button>
+            <div class="volver">
+            <a href="#" id="volver">Volver</a></p>
+        </div>
 
         </form>
         `;
@@ -167,17 +175,17 @@ function mostrarPanelRM(){
 
 function mostrarPanelPrincipal(){
     panel.innerHTML=`
-    <img src="../Sources/oro logo.png">
-                
-    <h1>BIENVENIDO/A</h1>
-                
-    <h2>Seleccione una opción</h2>
-                
-    <button class="menu-button" id="cargar">Cargar</button>
-
-    <button class="menu-button" id="consultar">Consultar</button>
-
-    <button class="menu-button" id="nuevo-rm">Nuevo RM</button>
+    <form id="menu">
+            <img src="img/oro logo.png">
+            <h1>Bienvenido/a</h1>                        
+            <h2>Seleccione una opción</h2>                        
+            <button class="menu-button" id="cargar">Cargar</button>
+            <button class="menu-button" id="consultar">Consultar</button>        
+            <button class="menu-button" id="nuevo-rm">Nuevo RM</button>
+    </form>
+    <div class="salir">
+        <a href="#" id="cerrarSesionLink">Cerrar sesión</a></p>
+    </div>
     
     `;
     cargar=document.querySelector("#cargar");
