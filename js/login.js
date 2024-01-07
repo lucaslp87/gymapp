@@ -1,5 +1,5 @@
 let users=[];
-let container = document.querySelector(".container");
+let panel = document.querySelector("#panel");
 
 class User{
     constructor(userName, password, checkPassword, clientNum){
@@ -9,12 +9,13 @@ class User{
         this.clientNum=clientNum;
     }
 }
+//Creo un usuario para acceder rápido mientras codeo
+users.push(new User("a","a","a","1"));
 
 function showLogInForm(){
 
     let logInFormHTML=`
         <form id="logInForm">
-            <img src="img/oro logo.png">
             <h1>Inicie sesión</h1>
             <input type="text" id="userName" name="userName" placeholder="Usuario" required>
             <input type="password" id="password" name="password" placeholder="Contraseña" required>
@@ -24,7 +25,7 @@ function showLogInForm(){
             <p>¿No tienes cuenta? <a href="#" id="signUpLink">Crear cuenta</a></p>
         </div>          
     `;
-    container.innerHTML= logInFormHTML;
+    panel.innerHTML= logInFormHTML;
     
     let signUpLink=document.querySelector("#signUpLink");
     signUpLink.addEventListener("click", (event) => {
@@ -54,7 +55,6 @@ function showLogInForm(){
 function showSignUpForm() {
     let signUpFormHTML = `
         <form id="signUpForm">
-            <img src="./img/oro logo.png">
             <h2>Crear cuenta</h2>
             <input type="text" id="newUsername" name="newUserName" placeholder="Nuevo usuario" required>
             <input type="password" id="newPassword" name="newPassword" placeholder="Contraseña" required>
@@ -67,7 +67,7 @@ function showSignUpForm() {
         </div>
     `;
 
-    container.innerHTML = signUpFormHTML;
+    panel.innerHTML = signUpFormHTML;
 
     let signUpForm =document.querySelector("#signUpForm");
     let logInLink = document.querySelector("#logInLink");
@@ -99,8 +99,9 @@ function showSignUpForm() {
         showLogInForm();
     })
 }
-showLogInForm();
-
 function redirectToIndex(){
     window.location.href="./index.html";
 }
+
+showLogInForm();
+
