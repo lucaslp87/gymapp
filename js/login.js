@@ -1,20 +1,6 @@
 let users=[];
 let panel = document.querySelector("#panel");
-
-class User{
-    constructor(userName, password, checkPassword, clientNum){
-        this.userName=userName;
-        this.password=password;
-        this.checkPassword=checkPassword;
-        this.clientNum=clientNum;
-    }
-}
-//Creo un usuario para acceder rápido mientras codeo
-users.push(new User("a","a","a","1"));
-
-function showLogInForm(){
-
-    let logInFormHTML=`
+let logInFormHTML=`
         <form id="logInForm">
             <h1>Inicie sesión</h1>
             <input type="text" id="userName" name="userName" placeholder="Usuario" required>
@@ -25,6 +11,35 @@ function showLogInForm(){
             <p>¿No tienes cuenta? <a href="#" id="signUpLink">Crear cuenta</a></p>
         </div>          
     `;
+let signUpFormHTML = `
+    <form id="signUpForm">
+        <h2>Crear cuenta</h2>
+        <input type="text" id="newUsername" name="newUserName" placeholder="Nuevo usuario" required>
+        <input type="password" id="newPassword" name="newPassword" placeholder="Contraseña" required>
+        <input type="password" id="checkPassword" name="checkPassword" placeholder="Repita contraseña" required>
+        <input type="text" id="clientNum" name="clientNum" placeholder="Nro. cliente" required>
+        <button type="submit">Crear cuenta</button>
+    </form>
+    <div class="signUp">
+        <p>¿Ya tienes cuenta? <a href="#" id="logInLink">Iniciar sesión</a></p>
+    </div>
+`;
+
+let isLog=JSON.parse(localStorage.getItem("isLog"));
+isLog?.usuario ? redirectToIndex():showLogInForm();
+
+class User{
+    constructor(userName, password, checkPassword, clientNum){
+        this.userName=userName;
+        this.password=password;
+        this.checkPassword=checkPassword;
+        this.clientNum=clientNum;
+    }
+}
+//Creo un usuario para acceder rápido mientras codeo;
+users.push(new User("lucas","abcd","abcd","101"));
+
+function showLogInForm(){
     panel.innerHTML= logInFormHTML;
     
     let signUpLink=document.querySelector("#signUpLink");
@@ -32,41 +47,26 @@ function showLogInForm(){
         event.preventDefault();
         showSignUpForm();
     })
-    let logInForm=document.querySelector("#logInForm");
-    
+
+    let logInForm=document.querySelector("#logInForm");    
     
     logInForm.addEventListener("submit", (event) => {
         event.preventDefault();
         let userToCheck=document.querySelector("#userName").value;
         let passToCheck=document.querySelector("#password").value;
-        userFound = users.find((user)=> user.userName===userToCheck && user.password===passToCheck);
+        let userFound = users.find((user)=> user.userName===userToCheck && user.password===passToCheck);
         if(userFound!=undefined){
+            localStorage.setItem("isLog", JSON.stringify({usuario:userFound.userName}));
             redirectToIndex();
         }else{
             alert("Usuario no encontrado, intentelo otra vez");
             logInForm.reset();
-        }
-
-        
+        }   
     });
 
 }
 
 function showSignUpForm() {
-    let signUpFormHTML = `
-        <form id="signUpForm">
-            <h2>Crear cuenta</h2>
-            <input type="text" id="newUsername" name="newUserName" placeholder="Nuevo usuario" required>
-            <input type="password" id="newPassword" name="newPassword" placeholder="Contraseña" required>
-            <input type="password" id="checkPassword" name="checkPassword" placeholder="Repita contraseña" required>
-            <input type="text" id="clientNum" name="clientNum" placeholder="Nro. cliente" required>
-            <button type="submit">Crear cuenta</button>
-        </form>
-        <div class="signUp">
-            <p>¿Ya tienes cuenta? <a href="#" id="logInLink">Iniciar sesión</a></p>
-        </div>
-    `;
-
     panel.innerHTML = signUpFormHTML;
 
     let signUpForm =document.querySelector("#signUpForm");
@@ -103,5 +103,5 @@ function redirectToIndex(){
     window.location.href="./index.html";
 }
 
-showLogInForm();
 
+showLogInForm();

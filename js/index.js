@@ -1,9 +1,79 @@
 let alumnos=[];
+
 let panel=document.querySelector("#panel");
 let cargar=document.querySelector("#cargar");
 let consultar=document.querySelector("#consultar");
 let nuevoRM=document.querySelector("#nuevo-rm");
 let cerrarSesionLink=document.querySelector("#cerrarSesionLink");
+
+
+let panelPpalHTML=`
+<h1>Bienvenido/a</h1>                        
+<h2>Seleccione una opción</h2>
+<form class="formulario" id="menu-principal">    
+    <button class="menu-button" id="cargar">Cargar</button>
+    <button class="menu-button" id="consultar">Consultar</button>        
+    <button class="menu-button" id="nuevo-rm">Nuevo RM</button>
+</form>
+<div class="salir">
+    <a href="#" id="cerrarSesionLink">Cerrar sesión</a></p>
+</div>
+`;
+let panelCargaHTML=`
+<h1>Cargar un alumno</h1>
+<h2>Complete el siguiente formulario</h2>
+<form class="formulario" id="form-carga">
+    <input type="text" name="nombre" class="menu-input" placeholder="Nombre" required></input>
+    <input type="text" name="apellido" class="menu-input" placeholder="Apellido" required></input>
+    <input type="text" name="dni" class="menu-input" placeholder="DNI" required></input>
+    <input type="text" name="plan" class="menu-input" placeholder="Plan" required></input>
+    <button type="submit" class="menu-button">Cargar</button>
+    <div class="volver">
+        <a href="#" id="volver">Volver</a></p>
+    </div>
+</form>
+`;
+let panelConsultaHTML=`
+<h1>Consultar un alumno</h1>
+<h2>Ingrese el DNI del alumno</h2>
+<form class="formulario" id="form-consulta">
+    <input type="text" name="dni" class="menu-input" placeholder="DNI" required></input>
+    <button type="submit" class="menu-button" id="buscar">Buscar</button>
+    <div class="volver">
+        <a href="#" id="volver">Volver</a></p>
+    </div>
+</form>
+`;
+let panel1RMHTML=`    
+<h1>Cargar RM</h1>
+<h2>Ingrese el DNI del alumno</h2>
+<form class="formulario" id="form-rm">
+    <input type="text" name="dni" class="menu-input" placeholder="DNI" required></input>
+    <button type="submit" class="menu-button" id="buscar">Buscar</button>
+    <div class="volver">
+        <a href="#" id="volver">Volver</a></p>
+    </div>
+</form>
+`;
+let panelOpc1RMHTML=`            
+<img src="img/oro logo.png">
+<h1>Cargar RM</h1>
+<h2>Selección de ejercicio y RM</h2>
+<form class="formulario" id="form-lista">
+    <select class="lista">
+        <option id="opcion" value="sentadilla">Sentadilla</option>
+        <option id="opcion" value="pressPlano">Press plano</option>
+        <option id="opcion" value="pressMilitar">Press militar</option>
+        <option id="opcion" value="pesoMuerto">Peso muerto</option>
+    </select>
+    <input type="number" class="menu-input" id="kg" placeholder="Cantidad en Kg"></input>
+    <button type="submit" class="menu-button">Guardar</button>
+    <div class="volver">
+    <a href="#" id="volver">Volver</a></p>
+    </div>
+</form>
+`;
+
 
 class Alumno{
     constructor(nombre,apellido,dni,plan,){
@@ -17,20 +87,7 @@ class Alumno{
 }   
 
 function mostrarPanelCarga(){
-    panel.innerHTML=`
-        <h1>Cargar un alumno</h1>
-        <h2>Complete el siguiente formulario</h2>
-        <form class="formulario" id="form-carga">
-            <input type="text" name="nombre" class="menu-input" placeholder="Nombre" required></input>
-            <input type="text" name="apellido" class="menu-input" placeholder="Apellido" required></input>
-            <input type="text" name="dni" class="menu-input" placeholder="DNI" required></input>
-            <input type="text" name="plan" class="menu-input" placeholder="Plan" required></input>
-            <button type="submit" class="menu-button">Cargar</button>
-            <div class="volver">
-                <a href="#" id="volver">Volver</a></p>
-            </div>
-        </form>
-    `;
+    panel.innerHTML=panelCargaHTML;
     
     let form=document.querySelector("#form-carga");
     let volver=document.querySelector("#volver");
@@ -60,17 +117,7 @@ function mostrarPanelCarga(){
 
 function mostrarPanelConsulta(){
 
-    panel.innerHTML=`
-    <h1>Consultar un alumno</h1>
-    <h2>Ingrese el DNI del alumno</h2>
-    <form class="formulario" id="form-consulta">
-        <input type="text" name="dni" class="menu-input" placeholder="DNI" required></input>
-        <button type="submit" class="menu-button" id="buscar">Buscar</button>
-        <div class="volver">
-            <a href="#" id="volver">Volver</a></p>
-        </div>
-    </form>
-    `;
+    panel.innerHTML=panelConsultaHTML;
     
     let form=document.querySelector("#form-consulta");
     let volver=document.querySelector("#volver");
@@ -81,10 +128,8 @@ function mostrarPanelConsulta(){
         let alumnoEncontrado=(alumnos.find((el)=>el.dni===dniBuscado))
         if (alumnoEncontrado!=undefined){
             console.log(alumnoEncontrado);
-            if(alumnoEncontrado.debe){
-                alert("El alumno tiene deuda pendiente");
-            }
-            //hacer aparecer un cartel con la info del alumno mas adelante
+            alumnoEncontrado.debe && alert("El alumno tiene deuda pendiente");
+            //hacer aparecer un cartel con la info del alumno mas adelante;
         }else{
             alert('El DNI no coincide con niguno de los alumnos cargados en el sistema');
             form.reset();
@@ -96,17 +141,7 @@ function mostrarPanelConsulta(){
 
 function mostrarPanelRM(){
     
-    panel.innerHTML=`    
-    <h1>Cargar RM</h1>
-    <h2>Ingrese el DNI del alumno</h2>
-    <form class="formulario" id="form-rm">
-        <input type="text" name="dni" class="menu-input" placeholder="DNI" required></input>
-        <button type="submit" class="menu-button" id="buscar">Buscar</button>
-        <div class="volver">
-            <a href="#" id="volver">Volver</a></p>
-        </div>
-    </form>
-    `;
+    panel.innerHTML=panel1RMHTML;
 
     let form=document.querySelector("#form-rm"); 
     let volver=document.querySelector("#volver");
@@ -116,24 +151,7 @@ function mostrarPanelRM(){
         let dniBuscado=form.querySelector(".menu-input").value;
         let alumnoEncontrado=(alumnos.find((el)=>el.dni===dniBuscado))
         if(alumnoEncontrado!=undefined){          
-            panel.innerHTML=`            
-            <img src="img/oro logo.png">
-            <h1>Cargar RM</h1>
-            <h2>Selección de ejercicio y RM</h2>
-            <form class="formulario" id="form-lista">
-                <select class="lista">
-                    <option id="opcion" value="sentadilla">Sentadilla</option>
-                    <option id="opcion" value="pressPlano">Press plano</option>
-                    <option id="opcion" value="pressMilitar">Press militar</option>
-                    <option id="opcion" value="pesoMuerto">Peso muerto</option>
-                </select>
-                <input type="number" class="menu-input" id="kg" placeholder="Cantidad en Kg"></input>
-                <button type="submit" class="menu-button">Guardar</button>
-                <div class="volver">
-                <a href="#" id="volver">Volver</a></p>
-                </div>
-            </form>
-            `;
+            panel.innerHTML=panelOpc1RMHTML;
         
             volver=document.querySelector("#volver");
             form=document.querySelector("#form-lista");
@@ -160,18 +178,7 @@ function mostrarPanelRM(){
 }
 
 function mostrarPanelPrincipal(){   
-    panel.innerHTML=`
-        <h1>Bienvenido/a</h1>                        
-        <h2>Seleccione una opción</h2>
-        <form class="formulario" id="menu-principal">    
-            <button class="menu-button" id="cargar">Cargar</button>
-            <button class="menu-button" id="consultar">Consultar</button>        
-            <button class="menu-button" id="nuevo-rm">Nuevo RM</button>
-        </form>
-        <div class="salir">
-            <a href="#" id="cerrarSesionLink">Cerrar sesión</a></p>
-        </div>
-    `;
+    panel.innerHTML=panelPpalHTML;
     cargar=document.querySelector("#cargar");
     consultar=document.querySelector("#consultar");
     nuevoRM=document.querySelector("#nuevo-rm");
@@ -183,10 +190,10 @@ function mostrarPanelPrincipal(){
     nuevoRM.addEventListener("click", mostrarPanelRM);
     cerrarSesionLink.addEventListener("click", redirectToLogin);
 
-    
 }
 
 function redirectToLogin(){
+    localStorage.removeItem("isLog");
     window.location.href="./login.html";
 }
 cargar.addEventListener("click", mostrarPanelCarga);

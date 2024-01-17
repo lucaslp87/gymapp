@@ -4,4 +4,4 @@ Comisión 61560
 
 Lucas Rodriguez
 
-Idea: un simulador de app para gimnasios, que permita loguearse, inscribirse en clases, llevar un control de los entrenamientos, controle la asistencia de los alumnos y recuerde cuando se vencen los abonos.
+Idea: un simulador de gestor de gimnasio. Que permita cargar alumnos, poner sus marcas personales y consultar sus datos.
