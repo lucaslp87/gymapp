@@ -1,3 +1,6 @@
+import { panel1RMHTML, panelCargaHTML, panelConsultaHTML, panelOpc1RMHTML, panelPpalHTML } from "./elements/innerHTML.js";
+import { Alumno } from "./elements/class.js";
+
 let alumnos=[];
 
 let panel=document.querySelector("#panel");
@@ -5,86 +8,7 @@ let cargar=document.querySelector("#cargar");
 let consultar=document.querySelector("#consultar");
 let nuevoRM=document.querySelector("#nuevo-rm");
 let cerrarSesionLink=document.querySelector("#cerrarSesionLink");
-
-
-let panelPpalHTML=`
-<h1>Bienvenido/a</h1>                        
-<h2>Seleccione una opción</h2>
-<form class="formulario" id="menu-principal">    
-    <button class="menu-button" id="cargar">Cargar</button>
-    <button class="menu-button" id="consultar">Consultar</button>        
-    <button class="menu-button" id="nuevo-rm">Nuevo RM</button>
-</form>
-<div class="salir">
-    <a href="#" id="cerrarSesionLink">Cerrar sesión</a></p>
-</div>
-`;
-let panelCargaHTML=`
-<h1>Cargar un alumno</h1>
-<h2>Complete el siguiente formulario</h2>
-<form class="formulario" id="form-carga">
-    <input type="text" name="nombre" class="menu-input" placeholder="Nombre" required></input>
-    <input type="text" name="apellido" class="menu-input" placeholder="Apellido" required></input>
-    <input type="text" name="dni" class="menu-input" placeholder="DNI" required></input>
-    <input type="text" name="plan" class="menu-input" placeholder="Plan" required></input>
-    <button type="submit" class="menu-button">Cargar</button>
-    <div class="volver">
-        <a href="#" id="volver">Volver</a></p>
-    </div>
-</form>
-`;
-let panelConsultaHTML=`
-<h1>Consultar un alumno</h1>
-<h2>Ingrese el DNI del alumno</h2>
-<form class="formulario" id="form-consulta">
-    <input type="text" name="dni" class="menu-input" placeholder="DNI" required></input>
-    <button type="submit" class="menu-button" id="buscar">Buscar</button>
-    <div class="volver">
-        <a href="#" id="volver">Volver</a></p>
-    </div>
-</form>
-`;
-let panel1RMHTML=`    
-<h1>Cargar RM</h1>
-<h2>Ingrese el DNI del alumno</h2>
-<form class="formulario" id="form-rm">
-    <input type="text" name="dni" class="menu-input" placeholder="DNI" required></input>
-    <button type="submit" class="menu-button" id="buscar">Buscar</button>
-    <div class="volver">
-        <a href="#" id="volver">Volver</a></p>
-    </div>
-</form>
-`;
-let panelOpc1RMHTML=`            
-<img src="img/oro logo.png">
-<h1>Cargar RM</h1>
-<h2>Selección de ejercicio y RM</h2>
-<form class="formulario" id="form-lista">
-    <select class="lista">
-        <option id="opcion" value="sentadilla">Sentadilla</option>
-        <option id="opcion" value="pressPlano">Press plano</option>
-        <option id="opcion" value="pressMilitar">Press militar</option>
-        <option id="opcion" value="pesoMuerto">Peso muerto</option>
-    </select>
-    <input type="number" class="menu-input" id="kg" placeholder="Cantidad en Kg"></input>
-    <button type="submit" class="menu-button">Guardar</button>
-    <div class="volver">
-    <a href="#" id="volver">Volver</a></p>
-    </div>
-</form>
-`;
-
-
-class Alumno{
-    constructor(nombre,apellido,dni,plan,){
-        this.nombre=nombre;
-        this.apellido=apellido;
-        this.dni=dni;
-        this.plan=plan;
-        this.debe=false;
-        this.rms={};
-        }
-}   
+ 
 
 function mostrarPanelCarga(){
     panel.innerHTML=panelCargaHTML;
@@ -106,10 +30,15 @@ function mostrarPanelCarga(){
     form.addEventListener("submit", (event)=>{
         
         event.preventDefault();
-        if(alumnoACargar)
-        alumnos.push(new Alumno(alumnoACargar.nombre, alumnoACargar.apellido, alumnoACargar.dni, alumnoACargar.plan));
-        alert('Alumno cargado correctamente! La cantidad de alumnos ahora es de ' + alumnos.length +'.' );
-        form.reset();
+        if(alumnoACargar){
+            alumnos.push(new Alumno(alumnoACargar.nombre, alumnoACargar.apellido, alumnoACargar.dni, alumnoACargar.plan));
+            Swal.fire({
+                title: "",
+                text: 'Alumno cargado correctamente! La cantidad de alumnos ahora es de ' + alumnos.length +'.',
+                icon: "success"
+            });
+            form.reset();
+        }
         })
     volver.addEventListener("click", mostrarPanelPrincipal);
     
@@ -131,7 +60,11 @@ function mostrarPanelConsulta(){
             alumnoEncontrado.debe && alert("El alumno tiene deuda pendiente");
             //hacer aparecer un cartel con la info del alumno mas adelante;
         }else{
-            alert('El DNI no coincide con niguno de los alumnos cargados en el sistema');
+            Swal.fire({
+                title: "",
+                text: 'El DNI no coincide con niguno de los alumnos cargados en el sistema',
+                icon: "error"
+            });
             form.reset();
         };           
     });
@@ -166,7 +99,11 @@ function mostrarPanelRM(){
                 form.reset();
             })
         }else{
-            alert('El DNI no coincide con niguno de los alumnos cargados en el sistema');
+            Swal.fire({
+            title: "",
+            text: 'El DNI no coincide con niguno de los alumnos cargados en el sistema',
+            icon: "error"
+        });
             form.reset();
         }
         volver.addEventListener("click", mostrarPanelRM);

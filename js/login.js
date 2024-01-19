@@ -1,41 +1,13 @@
+import { logInFormHTML, signUpFormHTML } from "./elements/innerHTML.js";
+import { User } from "./elements/class.js";
+
+
 let users=[];
 let panel = document.querySelector("#panel");
-let logInFormHTML=`
-        <form id="logInForm">
-            <h1>Inicie sesión</h1>
-            <input type="text" id="userName" name="userName" placeholder="Usuario" required>
-            <input type="password" id="password" name="password" placeholder="Contraseña" required>
-            <button type="submit">Iniciar sesión</button>
-        </form>
-        <div class="signUp">
-            <p>¿No tienes cuenta? <a href="#" id="signUpLink">Crear cuenta</a></p>
-        </div>          
-    `;
-let signUpFormHTML = `
-    <form id="signUpForm">
-        <h2>Crear cuenta</h2>
-        <input type="text" id="newUsername" name="newUserName" placeholder="Nuevo usuario" required>
-        <input type="password" id="newPassword" name="newPassword" placeholder="Contraseña" required>
-        <input type="password" id="checkPassword" name="checkPassword" placeholder="Repita contraseña" required>
-        <input type="text" id="clientNum" name="clientNum" placeholder="Nro. cliente" required>
-        <button type="submit">Crear cuenta</button>
-    </form>
-    <div class="signUp">
-        <p>¿Ya tienes cuenta? <a href="#" id="logInLink">Iniciar sesión</a></p>
-    </div>
-`;
 
 let isLog=JSON.parse(localStorage.getItem("isLog"));
 isLog?.usuario ? redirectToIndex():showLogInForm();
 
-class User{
-    constructor(userName, password, checkPassword, clientNum){
-        this.userName=userName;
-        this.password=password;
-        this.checkPassword=checkPassword;
-        this.clientNum=clientNum;
-    }
-}
 //Creo un usuario para acceder rápido mientras codeo;
 users.push(new User("lucas","abcd","abcd","101"));
 
@@ -59,7 +31,11 @@ function showLogInForm(){
             localStorage.setItem("isLog", JSON.stringify({usuario:userFound.userName}));
             redirectToIndex();
         }else{
-            alert("Usuario no encontrado, intentelo otra vez");
+            Swal.fire({
+                title: "Error",
+                text: "Usuario o contraseña incorrecta, intente nuevamente",
+                icon: "error"
+              });
             logInForm.reset();
         }   
     });
@@ -85,11 +61,19 @@ function showSignUpForm() {
     signUpForm.addEventListener("submit", function (event) {
         event.preventDefault();
         if(userACargar.newPassword===userACargar.checkPassword){
-        users.push(new User(userACargar.newUserName, userACargar.newPassword, userACargar.checkPassword, userACargar.clientNum));
-            alert('Cuenta cargada correctamente! La cantidad de usuarios ahora es de ' + users.length +'.' );
+            users.push(new User(userACargar.newUserName, userACargar.newPassword, userACargar.checkPassword, userACargar.clientNum));
+            Swal.fire({
+                title: "",
+                text: 'Cuenta cargada correctamente! La cantidad de usuarios ahora es de ' + users.length +'.',
+                icon: "success"
+            });
             signUpForm.reset();
         }else{
-            alert("Las contraseñas no coinciden, intente de nuevo");
+            Swal.fire({
+                title: "Error",
+                text: "Las contraseñas no coinciden, intente de nuevo",
+                icon: "error"
+            });
         }
         
     });
