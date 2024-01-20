@@ -26,9 +26,9 @@ export let panelPpalHTML=`
 <h1>Bienvenido/a</h1>                        
 <h2>Seleccione una opción</h2>
 <form class="formulario" id="menu-principal">    
-    <button class="menu-button" id="cargar">Cargar</button>
-    <button class="menu-button" id="consultar">Consultar</button>        
-    <button class="menu-button" id="nuevo-rm">Nuevo RM</button>
+    <button type="button" class="menu-button" id="cargar">Cargar</button>
+    <button type="button" class="menu-button" id="consultar">Consultar</button>        
+    <button type="button" class="menu-button" id="nuevo-rm">Nuevo RM</button>
 </form>
 <div class="salir">
     <a href="#" id="cerrarSesionLink">Cerrar sesión</a></p>

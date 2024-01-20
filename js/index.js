@@ -9,6 +9,9 @@ let consultar=document.querySelector("#consultar");
 let nuevoRM=document.querySelector("#nuevo-rm");
 let cerrarSesionLink=document.querySelector("#cerrarSesionLink");
  
+function guardarAlumnosEnLocalStorage() {
+    localStorage.setItem('alumnos', JSON.stringify(alumnos));
+}
 
 function mostrarPanelCarga(){
     panel.innerHTML=panelCargaHTML;
@@ -35,9 +38,12 @@ function mostrarPanelCarga(){
             Swal.fire({
                 title: "",
                 text: 'Alumno cargado correctamente! La cantidad de alumnos ahora es de ' + alumnos.length +'.',
-                icon: "success"
+                icon: "success",
+                heightAuto: false
             });
             form.reset();
+
+            guardarAlumnosEnLocalStorage();
         }
         })
     volver.addEventListener("click", mostrarPanelPrincipal);
@@ -56,14 +62,20 @@ function mostrarPanelConsulta(){
         let dniBuscado=form.querySelector(".menu-input").value;   
         let alumnoEncontrado=(alumnos.find((el)=>el.dni===dniBuscado))
         if (alumnoEncontrado!=undefined){
-            console.log(alumnoEncontrado);
+            Swal.fire({
+                title: "",
+                text: JSON.stringify(alumnoEncontrado),
+                icon: "",
+                heightAuto: false
+            });
             alumnoEncontrado.debe && alert("El alumno tiene deuda pendiente");
             //hacer aparecer un cartel con la info del alumno mas adelante;
         }else{
             Swal.fire({
                 title: "",
                 text: 'El DNI no coincide con niguno de los alumnos cargados en el sistema',
-                icon: "error"
+                icon: "error",
+                heightAuto: false
             });
             form.reset();
         };           
@@ -85,7 +97,7 @@ function mostrarPanelRM(){
         let alumnoEncontrado=(alumnos.find((el)=>el.dni===dniBuscado))
         if(alumnoEncontrado!=undefined){          
             panel.innerHTML=panelOpc1RMHTML;
-        
+            
             volver=document.querySelector("#volver");
             form=document.querySelector("#form-lista");
             let lista=document.querySelector(".lista");
@@ -95,14 +107,20 @@ function mostrarPanelRM(){
                 let index=alumnos.findIndex((el)=> dniBuscado===el.dni);
                 let opcion=lista.value;
                 alumnos[index].rms[opcion]= parseFloat(kg.value);
-                console.log(alumnos[index]);
+                Swal.fire({
+                    title: "",
+                    text: `El nuevo 1RM en ${opcion} del alumno ${alumnos[index].nombre + " " + alumnos[index].apellido} es de ${kg.value} kg.`,
+                    icon: "success",
+                    heightAuto: false
+                });
                 form.reset();
             })
         }else{
             Swal.fire({
             title: "",
             text: 'El DNI no coincide con niguno de los alumnos cargados en el sistema',
-            icon: "error"
+            icon: "error",
+            heightAuto: false
         });
             form.reset();
         }
@@ -114,7 +132,10 @@ function mostrarPanelRM(){
 
 }
 
-function mostrarPanelPrincipal(){   
+function mostrarPanelPrincipal(){
+    const alumnosLocalStorage = localStorage.getItem('alumnos');
+    alumnosLocalStorage && (alumnos = JSON.parse(alumnosLocalStorage));
+
     panel.innerHTML=panelPpalHTML;
     cargar=document.querySelector("#cargar");
     consultar=document.querySelector("#consultar");

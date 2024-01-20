@@ -34,7 +34,8 @@ function showLogInForm(){
             Swal.fire({
                 title: "Error",
                 text: "Usuario o contraseña incorrecta, intente nuevamente",
-                icon: "error"
+                icon: "error",
+                heightAuto: false
               });
             logInForm.reset();
         }   
@@ -65,14 +66,16 @@ function showSignUpForm() {
             Swal.fire({
                 title: "",
                 text: 'Cuenta cargada correctamente! La cantidad de usuarios ahora es de ' + users.length +'.',
-                icon: "success"
+                icon: "success",
+                heightAuto: false
             });
             signUpForm.reset();
         }else{
             Swal.fire({
                 title: "Error",
                 text: "Las contraseñas no coinciden, intente de nuevo",
-                icon: "error"
+                icon: "error",
+                heightAuto: false
             });
         }
         
