@@ -21,7 +21,7 @@ function cargarAlumnosLocalStorage(){
 
 async function devolverListaAlumnos(){
     let listaAlumnos=[]
-    await fetch('../js/elements/data.json')
+    await fetch('./js/elements/data.json')
     .then((response)=>response.json())
     .then((data)=>{ 
         listaAlumnos = data.alumnos;
@@ -226,7 +226,7 @@ function redirectToLogin(){
 }
 
 let isLog=JSON.parse(localStorage.getItem("isLog"));
-isLog || redirectToLogin();
+isLog?.usuario || redirectToLogin();
 
 cargar.addEventListener("click", mostrarPanelCarga);
 
