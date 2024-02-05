@@ -28,6 +28,7 @@ async function devolverListaAlumnos(){
         });
     return listaAlumnos;
 }
+
 async function mostrarPanelAlumnos(){
     let panelAlumnosHTML=``;
     (await devolverListaAlumnos()).forEach(a => {
@@ -164,28 +165,28 @@ function mostrarPanelRM(){
     form.addEventListener("submit", async (event)=>{
         event.preventDefault();
         let dniBuscado=form.querySelector(".menu-input").value;   
-        let alumnoEncontradoenArray = (alumnos.find((el)=>el.dni===dniBuscado));
-        let alumnoEncontradoEnJSON = (await devolverListaAlumnos()).find((el)=>el.dni===dniBuscado);
-        if (alumnoEncontradoenArray!=undefined || alumnoEncontradoEnJSON!=undefined){
+        let alumnoEncontrado =alumnos.find((el)=>el.dni===dniBuscado);
+        if (alumnoEncontrado!= undefined){
             panel.innerHTML=panelOpc1RMHTML;
-            
             volver=document.querySelector("#volver");
             form=document.querySelector("#form-lista");
             let lista=document.querySelector(".lista");
             let kg=document.querySelector("#kg");    
             form.addEventListener("submit", async (event)=>{
                 event.preventDefault();
-                let index = (alumnos.findIndex((el)=> dniBuscado===el.dni)) || ((await devolverListaAlumnos()).findIndex((el)=> dniBuscado===el.dni));
+                let index = alumnos.findIndex((el)=> dniBuscado===el.dni);
                 let opcion = lista.value;
-                alumnos[index].rms[opcion] = parseFloat(kg.value);
-                Swal.fire({
-                    title: "",
-                    text: `El nuevo 1RM en ${opcion} del alumno ${alumnos[index].nombre + " " + alumnos[index].apellido} es de ${kg.value} kg.`,
-                    icon: "success",
-                    heightAuto: false
-                });
-                form.reset();
-                guardarAlumnosEnLocalStorage();
+                if(index!== -1){
+                    alumnos[index].rms[opcion] = parseFloat(kg.value);
+                    Swal.fire({
+                        title: "",
+                        text: `El nuevo 1RM en ${opcion} del alumno ${alumnos[index].nombre + " " + alumnos[index].apellido} es de ${kg.value} kg.`,
+                        icon: "success",
+                        heightAuto: false
+                    });
+                    form.reset();
+                    guardarAlumnosEnLocalStorage();
+                }
             })
         }else{
             Swal.fire({
