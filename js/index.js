@@ -21,7 +21,7 @@ function cargarAlumnosLocalStorage(){
 
 async function devolverListaAlumnos(){
     let listaAlumnos=[]
-    await fetch('./js/elements/data.json')
+    await fetch('https://raw.githubusercontent.com/lucaslp87/gymapp/main/js/elements/data.json')
     .then((response)=>response.json())
     .then((data)=>{ 
         listaAlumnos = data.alumnos;
