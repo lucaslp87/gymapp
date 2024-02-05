@@ -222,7 +222,7 @@ function mostrarPanelPrincipal(){
 
 function redirectToLogin(){
     localStorage.removeItem("isLog");
-    window.location.href="./login.html";
+    window.location.href="./pages/login.html";
 }
 
 let isLog=JSON.parse(localStorage.getItem("isLog"));
