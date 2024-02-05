@@ -1,0 +1,134 @@
+{
+    "alumnos": [
+      {
+        "nombre": "Juan",
+        "apellido": "Pérez",
+        "dni": "12345678",
+        "plan": "musculacion",
+        "debe": false,
+        "rms": {
+          "sentadilla": 80,
+          "pressPlano": 50,
+          "pressMilitar": 40,
+          "pesoMuerto": 100
+        }
+      },
+      {
+        "nombre": "María",
+        "apellido": "Gómez",
+        "dni": "87654321",
+        "plan": "funcional",
+        "debe": true,
+        "rms": {
+          "sentadilla": 60,
+          "pressPlano": 40,
+          "pressMilitar": 35,
+          "pesoMuerto": 90
+        }
+      },
+      {
+        "nombre": "Carlos",
+        "apellido": "Rodríguez",
+        "dni": "55555555",
+        "plan": "full",
+        "debe": false,
+        "rms": {
+          "sentadilla": 90,
+          "pressPlano": 55,
+          "pressMilitar": 45,
+          "pesoMuerto": 110
+        }
+      },
+      {
+        "nombre": "Ana",
+        "apellido": "López",
+        "dni": "98765432",
+        "plan": "musculacion",
+        "debe": true,
+        "rms": {
+          "sentadilla": 70,
+          "pressPlano": 48,
+          "pressMilitar": 42,
+          "pesoMuerto": 95
+        }
+      },
+      {
+        "nombre": "Martín",
+        "apellido": "Fernández",
+        "dni": "11112222",
+        "plan": "funcional",
+        "debe": false,
+        "rms": {
+          "sentadilla": 75,
+          "pressPlano": 52,
+          "pressMilitar": 38,
+          "pesoMuerto": 105
+        }
+      },
+      {
+        "nombre": "Laura",
+        "apellido": "Sánchez",
+        "dni": "33334444",
+        "plan": "full",
+        "debe": true,
+        "rms": {
+          "sentadilla": 85,
+          "pressPlano": 60,
+          "pressMilitar": 50,
+          "pesoMuerto": 120
+        }
+      },
+      {
+        "nombre": "Roberto",
+        "apellido": "Martínez",
+        "dni": "66667777",
+        "plan": "musculacion",
+        "debe": false,
+        "rms": {
+          "sentadilla": 95,
+          "pressPlano": 70,
+          "pressMilitar": 55,
+          "pesoMuerto": 130
+        }
+      },
+      {
+        "nombre": "Carmen",
+        "apellido": "Hernández",
+        "dni": "99990000",
+        "plan": "funcional",
+        "debe": true,
+        "rms": {
+          "sentadilla": 65,
+          "pressPlano": 45,
+          "pressMilitar": 40,
+          "pesoMuerto": 100
+        }
+      },
+      {
+        "nombre": "Francisco",
+        "apellido": "Díaz",
+        "dni": "44445555",
+        "plan": "full",
+        "debe": false,
+        "rms": {
+          "sentadilla": 88,
+          "pressPlano": 58,
+          "pressMilitar": 48,
+          "pesoMuerto": 115
+        }
+      },
+      {
+        "nombre": "Elena",
+        "apellido": "Jiménez",
+        "dni": "22223333",
+        "plan": "musculacion",
+        "debe": true,
+        "rms": {
+          "sentadilla": 78,
+          "pressPlano": 53,
+          "pressMilitar": 43,
+          "pesoMuerto": 105
+        }
+      }
+    ]
+  }

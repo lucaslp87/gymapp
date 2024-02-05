@@ -19,6 +19,7 @@ body {
     flex-direction:column;
     flex: 1;    
     align-items: center;
+    margin:auto;
     background-color: #cccd;
     padding: 25px;
     border: none;
@@ -38,6 +39,10 @@ h2{
     margin-bottom: 10px;
     font-size: 3vh;
 }
+h3{
+    margin-bottom: 5px;
+    font-size: 3vh;
+}
 
 img {
     display: flex;
@@ -45,6 +50,7 @@ img {
     max-width: 35vw;
     max-height: 35vh;
     margin: auto;
+    object-fit: scale-down;
     filter: drop-shadow(1px 1px 1px);
     transition-property: width;
     transition-duration: .3s;
@@ -70,7 +76,7 @@ form select {
     margin: 2.5px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width:auto;
+    width:180px;
     box-shadow: 0 0 10px #000.1;
     text-align: center;
 }
@@ -114,4 +120,17 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.alumnos-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    padding-top: 25px;
+}
+
+.alumno-card{
+    border: 2px solid black;
+    padding: 10px;
+    min-width: max-content;
 }
