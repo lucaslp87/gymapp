@@ -191,7 +191,7 @@ function mostrarPanelRM(){
         }else{
             Swal.fire({
             title: "",
-            text: 'El DNI no coincide con niguno de los alumnos cargados en el sistema',
+            text: 'El DNI no coincide con niguno de los alumnos cargados en el sistema. (Leer comentario en el código)',
             icon: "error",
             heightAuto: false
         });
