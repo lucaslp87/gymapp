@@ -162,7 +162,7 @@ function mostrarPanelRM(){
     let form=document.querySelector("#form-rm"); 
     let volver=document.querySelector("#volver");
     
-    form.addEventListener("submit", async (event)=>{
+    form.addEventListener("submit", (event)=>{
         event.preventDefault();
         let dniBuscado=form.querySelector(".menu-input").value;   
         let alumnoEncontrado =alumnos.find((el)=>el.dni===dniBuscado);
@@ -172,7 +172,7 @@ function mostrarPanelRM(){
             form=document.querySelector("#form-lista");
             let lista=document.querySelector(".lista");
             let kg=document.querySelector("#kg");    
-            form.addEventListener("submit", async (event)=>{
+            form.addEventListener("submit", (event)=>{
                 event.preventDefault();
                 let index = alumnos.findIndex((el)=> dniBuscado===el.dni);
                 let opcion = lista.value;
