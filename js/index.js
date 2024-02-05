@@ -226,7 +226,7 @@ function redirectToLogin(){
 }
 
 let isLog=JSON.parse(localStorage.getItem("isLog"));
-isLog?.usuario || redirectToLogin();
+isLog || redirectToLogin();
 
 cargar.addEventListener("click", mostrarPanelCarga);
 
